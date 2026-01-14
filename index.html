@@ -1,3 +1,61 @@
+</head>
+
+<body>
+    <header>
+        <div class="inner">
+            <h1>🕵🏾‍♀️ Microsoft Defender Advanced Hunting — Unauthorized TOR Usage Lab</h1>
+            <p class="subtitle">End-to-end threat hunting case study: TOR installation, execution, network activity, and
+                anti-forensics on a Windows 11 endpoint.</p>
+            <div class="badge-row"> <img src="https://img.shields.io/badge/Lab-Completed-brightgreen"
+                    alt="Lab Completed"> <img src="https://img.shields.io/badge/Platform-Microsoft%20Defender-blue"
+                    alt="Platform Microsoft Defender"> <img
+                    src="https://img.shields.io/badge/Tools-KQL%20%7C%20PowerShell-orange"
+                    alt="Tools KQL and PowerShell"> <img
+                    src="https://img.shields.io/badge/Focus-Threat%20Hunting%20%7C%20EDR-lightgrey"
+                    alt="Focus Threat Hunting EDR"> </div>
+        </div>
+    </header>
+    <div class="page-wrapper">
+        <div class="section-card">
+            <h2>📌 Overview</h2>
+            <p> This project demonstrates how unauthorized TOR Browser usage appears in Microsoft Defender for Endpoint
+                (MDE) telemetry and how to hunt for it using Advanced Hunting (KQL). A controlled lab scenario was used
+                to simulate a real-world investigation, including TOR installation, execution, anonymized network
+                traffic, and basic anti-forensics. </p>
+            <p class="tagline"> Goal: show recruiters and SOC teams that I can think, investigate, and document like an
+                analyst. </p>
+        </div>
+        <div class="section-card">
+            <h2>🎯 Hunt Objective</h2>
+            <p> Simulate unauthorized TOR Browser installation and usage on a Windows endpoint and validate detection
+                coverage across file, process, and network telemetry layers using Microsoft Defender Advanced Hunting.
+            </p>
+        </div>
+        <div class="section-card">
+            <h2>🧪 Scenario Summary</h2>
+            <p> A user downloaded the TOR Browser installer, performed a silent installation, launched TOR, browsed via
+                onion-based traffic, and created then deleted a suspicious file named
+                <code>tor-shopping-list.txt</code>. This behavior was designed to mimic policy-violating anonymization
+                activity and simple anti-forensics on an enterprise-managed endpoint. </p>
+        </div>
+        <div class="section-card">
+            <h2>🧰 Environment</h2>
+            <ul class="meta-list">
+                <li><strong>Endpoint:</strong> Windows 11 VM (<code>chi-chi-vm</code>)</li>
+                <li><strong>Telemetry Platform:</strong> Microsoft Defender for Endpoint (MDE)</li>
+                <li><strong>Hunting Tool:</strong> Microsoft Defender Advanced Hunting (KQL)</li>
+                <li><strong>Key Tables:</strong> <code>DeviceFileEvents</code>, <code>DeviceProcessEvents</code>,
+                    <code>DeviceNetworkEvents</code></li>
+            </ul>
+        </div>
+        <div class="section-card">
+            <h2>📁 Folder Structure</h2>
+            <pre><code>mde-tor-threat-hunt/ ├── evidence/ │ └── screenshots/ ├── kql/ ├── report/ └── index.html </code></pre>
+        </div> <!-- Next steps: phases, screenshots, KQL, MITRE, timeline, etc. will be added below in later steps -->
+    </div>
+</body>
+
+</html>
 <!-- ========================= -->
 <!-- 🔥 PHASE 1 — ACTION STEPS -->
 <!-- ========================= -->
