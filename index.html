@@ -1,0 +1,231 @@
+<!-- ========================= -->
+<!-- 🔥 PHASE 1 — ACTION STEPS -->
+<!-- ========================= -->
+
+<div class="section-card">
+    <h2>🔥 Phase 1 — Simulate Unauthorized TOR Activity</h2>
+</div>
+
+<!-- STEP 1 -->
+<div class="section-card">
+    <h3>1.1 Download TOR Installer</h3>
+    <p>Download the TOR Browser installer to generate file telemetry for hunting.</p>
+
+    <pre><code>
+# Action performed
+Downloaded: tor-browser-windows-x64.exe
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/03_TOR_Installer_Downloaded_In_Downloads.png" width="800">
+        <figcaption><strong>Figure 1:</strong> TOR installer downloaded to the system</figcaption>
+    </figure>
+
+    <pre><code>
+DeviceFileEvents
+| where FileName startswith "tor-browser-windows"
+| project Timestamp, DeviceName, ActionType, FileName, FolderPath
+| order by Timestamp desc
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/KQL_01_TOR_Installer_FileEvents.png" width="800">
+        <figcaption><strong>KQL Output 1:</strong> TOR installer file event detection</figcaption>
+    </figure>
+</div>
+
+<!-- STEP 2 -->
+<div class="section-card">
+    <h3>1.2 Confirm Installer Filename</h3>
+    <p>Verify the installer name to ensure accurate hunting queries.</p>
+
+    <pre><code>
+# Action performed
+Confirmed filename in Downloads folder
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/04_TOR_Installer_Filename_Confirmed.png" width="800">
+        <figcaption><strong>Figure 2:</strong> TOR installer filename confirmed</figcaption>
+    </figure>
+
+    <pre><code>
+DeviceFileEvents
+| where FileName startswith "tor-browser-windows"
+| project Timestamp, DeviceName, FileName, FolderPath
+| order by Timestamp desc
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/KQL_01_TOR_Installer_FileEvents.png" width="800">
+        <figcaption><strong>KQL Output 1 (Reused):</strong> Installer filename validation</figcaption>
+    </figure>
+</div>
+
+<!-- STEP 3 -->
+<div class="section-card">
+    <h3>1.3 Perform Silent Install</h3>
+    <p>Execute a silent installation to simulate stealthy software deployment.</p>
+
+    <pre><code>
+Start-Process "tor-browser-windows-x64.exe" -ArgumentList "/S"
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/05_TOR_Silent_Install_Command_Executed.png" width="800">
+        <figcaption><strong>Figure 3:</strong> Silent TOR installation executed</figcaption>
+    </figure>
+
+    <pre><code>
+DeviceProcessEvents
+| where ProcessCommandLine has "tor-browser-windows"
+| where ProcessCommandLine has "/S"
+| project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine
+| order by Timestamp desc
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/KQL_02_TOR_Silent_Install_ProcessEvents.png" width="800">
+        <figcaption><strong>KQL Output 2:</strong> Silent install detected</figcaption>
+    </figure>
+</div>
+
+<!-- STEP 4 -->
+<div class="section-card">
+    <h3>1.4 Launch TOR Browser</h3>
+    <p>Launch TOR to generate process execution telemetry.</p>
+
+    <pre><code>
+# Action performed
+TOR Browser launched from installation directory
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/06_TOR_Browser_Launched.png" width="800">
+        <figcaption><strong>Figure 4:</strong> TOR Browser successfully launched</figcaption>
+    </figure>
+
+    <pre><code>
+DeviceProcessEvents
+| where FileName in~ ("tor.exe","firefox.exe")
+| project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine
+| order by Timestamp desc
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/KQL_04_TOR_Execution_ProcessEvents.png" width="800">
+        <figcaption><strong>KQL Output 3:</strong> TOR execution detected</figcaption>
+    </figure>
+</div>
+
+<!-- STEP 5 -->
+<div class="section-card">
+    <h3>1.5 Generate TOR Network Activity</h3>
+    <p>Browse onion sites to generate anonymized network traffic.</p>
+
+    <pre><code>
+# Action performed
+Visited multiple .onion URLs to generate TOR traffic
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/07_TOR_Network_Activity_Generated.png" width="800">
+        <figcaption><strong>Figure 5:</strong> TOR network activity generated</figcaption>
+    </figure>
+
+    <pre><code>
+DeviceNetworkEvents
+| where InitiatingProcessFileName in~ ("tor.exe", "firefox.exe")
+| where RemotePort in (9001, 9030, 9040, 9050, 9051, 9150)
+| project Timestamp, DeviceName, InitiatingProcessFileName, RemoteIP, RemotePort
+| order by Timestamp desc
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/KQL_05_TOR_Network_Activity.png" width="800">
+        <figcaption><strong>KQL Output 4:</strong> TOR network activity detected</figcaption>
+    </figure>
+</div>
+
+<!-- STEP 6 -->
+<div class="section-card">
+    <h3>1.6 Create Suspicious File</h3>
+    <p>Create a file to simulate illicit activity and generate file telemetry.</p>
+
+    <pre><code>
+New-Item -Path "$env:USERPROFILE\Desktop\tor-shopping-list.txt" -ItemType File
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/08-09_TOR_Shopping_List_File_Create_Modify_Delete_PowerShell.png" width="800">
+        <figcaption><strong>Figure 6:</strong> Suspicious file created</figcaption>
+    </figure>
+
+    <pre><code>
+DeviceFileEvents
+| where FileName == "tor-shopping-list.txt"
+| project Timestamp, DeviceName, ActionType, FileName, FolderPath
+| order by Timestamp desc
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/KQL_06_TOR_Shopping_List_FileEvents.png" width="800">
+        <figcaption><strong>KQL Output 5:</strong> Suspicious file creation detected</figcaption>
+    </figure>
+</div>
+
+<!-- STEP 7 -->
+<div class="section-card">
+    <h3>1.7 Modify Suspicious File</h3>
+    <p>Modify the file to simulate user interaction and generate additional telemetry.</p>
+
+    <pre><code>
+Set-Content -Path "$env:USERPROFILE\Desktop\tor-shopping-list.txt" -Value "Dark web shopping list"
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/08-09_TOR_Shopping_List_File_Create_Modify_Delete_PowerShell.png" width="800">
+        <figcaption><strong>Figure 7:</strong> Suspicious file modified</figcaption>
+    </figure>
+
+    <pre><code>
+DeviceFileEvents
+| where FileName == "tor-shopping-list.txt"
+| where ActionType == "FileModified"
+| project Timestamp, DeviceName, ActionType, FileName, FolderPath
+| order by Timestamp desc
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/KQL_06_TOR_Shopping_List_FileEvents.png" width="800">
+        <figcaption><strong>KQL Output 6:</strong> File modification detected</figcaption>
+    </figure>
+</div>
+
+<!-- STEP 8 -->
+<div class="section-card">
+    <h3>1.8 Delete Suspicious File</h3>
+    <p>Delete the file to simulate anti-forensics behavior.</p>
+
+    <pre><code>
+Remove-Item -Path "$env:USERPROFILE\Desktop\tor-shopping-list.txt"
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/08-09_TOR_Shopping_List_File_Create_Modify_Delete_PowerShell.png" width="800">
+        <figcaption><strong>Figure 8:</strong> Suspicious file deleted</figcaption>
+    </figure>
+
+    <pre><code>
+DeviceFileEvents
+| where FileName == "tor-shopping-list.txt"
+| where ActionType == "FileDeleted"
+| project Timestamp, DeviceName, ActionType, FileName, FolderPath
+| order by Timestamp desc
+    </code></pre>
+
+    <figure>
+        <img src="evidence/screenshots/KQL_06_TOR_Shopping_List_FileEvents.png" width="800">
+        <figcaption><strong>KQL Output 7:</strong> File deletion detected</figcaption>
+    </figure>
+</div>
