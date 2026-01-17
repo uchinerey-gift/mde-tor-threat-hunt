@@ -1,80 +1,110 @@
 # 🕵🏾‍♀️ Microsoft Defender Advanced Hunting — Unauthorized TOR Usage Lab
 
-![Status](https://img.shields.io/badge/Lab-Completed-brightgreen)
+![TOR Threat Hunt Complete](https://img.shields.io/badge/TOR%20Threat%20Hunt-Complete-brightgreen)
 ![Platform](https://img.shields.io/badge/Platform-Microsoft%20Defender-blue)
 ![Tools](https://img.shields.io/badge/Tools-KQL%20%7C%20PowerShell-orange)
 ![Focus](https://img.shields.io/badge/Focus-Threat%20Hunting%20%7C%20EDR-lightgrey)
 
-A step-by-step Microsoft Defender for Endpoint threat-hunting lab demonstrating detection of unauthorized TOR browser usage across file, process, and network telemetry.
+A hands-on Microsoft Defender for Endpoint threat-hunting project demonstrating how unauthorized TOR Browser activity appears across file, process, and network telemetry — and how to investigate it using Advanced Hunting (KQL).
 
 ---
 
-## Step 1 — Device Visibility Validation
+## 📌 Project Overview
 
-Confirmed the Windows endpoint was visible and actively reporting in Microsoft Defender to ensure telemetry would be captured for the investigation.
+This lab simulates a realistic enterprise security scenario in which a user downloads, silently installs, launches, and uses the TOR Browser on a managed Windows endpoint. Additional suspicious behavior is introduced through basic anti-forensics techniques.
 
-Evidence file: `01_MDE_Device_Visible_In_Defender_Portal.png`  
-![01_MDE_Device_Visible_In_Defender_Portal](evidence/screenshots/01_MDE_Device_Visible_In_Defender_Portal.png)
+The project demonstrates how a SOC analyst validates endpoint visibility, identifies unauthorized anonymization tools, correlates telemetry across multiple data sources, and documents findings in a clear, professional format suitable for escalation or reporting.
+
+A full HTML case study is included to showcase investigation methodology, evidence handling, and presentation skills beyond a traditional README.
 
 ---
 
-## Step 2 — Defender Sensor Validation
+## 🎯 Hunt Objectives
 
-Verified the Microsoft Defender for Endpoint sensor (Sense service) was running to confirm endpoint telemetry ingestion.
+- Detect unauthorized TOR Browser installation and execution  
+- Identify TOR-related anonymized network traffic  
+- Validate Microsoft Defender for Endpoint telemetry ingestion  
+- Demonstrate structured threat hunting using KQL  
+- Produce portfolio-quality SOC investigation documentation  
 
-```powershell
-Get-Service -Name Sense
-Evidence file: 02_Windows_Sense_Service_Running.png
+---
 
-Step 3 — TOR Installer Download
-Downloaded the TOR Browser installer to the endpoint to generate file creation and download telemetry.
+## 🧰 Environment
 
-powershell
-Copy code
-# TOR installer downloaded via browser to the Downloads directory
-Evidence file: 03_TOR_Installer_Downloaded_In_Downloads.png
+- **Endpoint:** Windows 11 Virtual Machine (`chi-chi-vm`)  
+- **Security Platform:** Microsoft Defender for Endpoint  
+- **Hunting Interface:** Microsoft Defender Advanced Hunting  
+- **Languages & Tools:** PowerShell, KQL  
+- **Key Tables Used:**  
+  - `DeviceInfo`  
+  - `DeviceFileEvents`  
+  - `DeviceProcessEvents`  
+  - `DeviceNetworkEvents`  
 
-Step 4 — TOR Installer Filename Confirmation
-Identified and documented the exact TOR installer filename and version to ensure accurate KQL hunting.
+---
 
-powershell
-Copy code
-# Verified exact installer filename in the Downloads folder
-Evidence file: 04_TOR_Installer_Filename_Confirmed.png
+## 🔍 Investigation Summary
 
-Step 5 — Silent TOR Installation Execution
-Executed the TOR installer using silent installation flags to simulate unauthorized background software installation.
+The following activity was simulated and successfully identified using Microsoft Defender telemetry:
 
-powershell
-Copy code
-tor-browser-windows-x86_64-portable-15.0.3.exe  /S
-Evidence file: 05_TOR_Silent_Install_Command_Executed.png
+- TOR installer downloaded to the endpoint  
+- Silent TOR installation executed  
+- TOR Browser launched  
+- Anonymized TOR network traffic generated  
+- Suspicious file created, modified, and deleted to simulate anti-forensics behavior  
 
-Step 6 — TOR Browser Execution
-Launched TOR Browser to generate process execution telemetry associated with anonymization tooling.
+Each action was validated through Advanced Hunting queries and documented with supporting evidence.
 
-powershell
-Copy code
-# TOR Browser launched from extracted directory
-Evidence file: 06_TOR_Browser_Launched.png
+---
 
-Step 7 — TOR Network Activity Generation
-Generated anonymized outbound network activity by browsing through TOR to produce network telemetry.
+## 🧪 Investigation Walkthrough
 
-powershell
-Copy code
-# Active browsing session through TOR network
-Evidence file: 07_TOR_Network_Activity_Generated.png
+A full step-by-step investigation is documented in the interactive HTML case study:
 
-Step 8 — Suspicious File Creation and Deletion
-Created and deleted a suspicious file using PowerShell to simulate artifact staging and anti-forensics behavior.
+👉 **Open `index.html` in a browser to view the complete investigation**
 
-powershell
-Copy code
-cd $env:USERPROFILE\Desktop
-New-Item -Name "tor-shopping-list.txt" -ItemType File
-Add-Content -Path "tor-shopping-list.txt" -Value "fake item 1"
-Add-Content -Path "tor-shopping-list.txt" -Value "fake item 2"
-Remove-Item -Path "tor-shopping-list.txt"
-Evidence file: 08-09_TOR_Shopping_List_File_Create_Modify_Delete_PowerShell.png
+The report includes:
+- Clearly defined investigation phases  
+- PowerShell commands used to generate activity  
+- Evidence screenshots  
+- KQL queries per activity type  
+- KQL results screenshots  
+- Analyst-style narrative and findings  
 
+---
+
+## 🧠 Skills Demonstrated
+
+- Threat hunting using **Microsoft Defender for Endpoint (Advanced Hunting)**  
+- Writing and refining **Kusto Query Language (KQL)** queries  
+- Correlating **file, process, and network** telemetry  
+- Detecting **unauthorized anonymization tools (TOR Browser)**  
+- Validating **endpoint visibility and sensor health**  
+- Identifying **basic anti-forensics behaviors** (file creation, modification, deletion)  
+- Producing **SOC-style investigation documentation and evidence**  
+
+---
+
+## 🔎 SOC & Detection Relevance
+
+This project reflects real-world SOC workflows by demonstrating how analysts validate telemetry ingestion, identify policy-violating software without relying solely on alerts, and correlate endpoint data across multiple sources. The investigation aligns with Tier 1–2 SOC responsibilities, including initial triage, investigation, evidence collection, and clear documentation for escalation or compliance review.
+
+---
+
+## 📈 Continuous Development
+
+This project represents an ongoing focus on strengthening SOC analyst skills through hands-on threat hunting, iterative query refinement, and professional documentation of endpoint investigations using Microsoft Defender for Endpoint.
+
+---
+
+## 👤 Author
+
+**Chinerey “Chi Chi” Ukwu**  
+Cybersecurity Analyst | Threat Hunting | Endpoint Security  
+GitHub: https://github.com/uchinerey-gift
+
+---
+
+## ⚠️ Disclaimer
+
+This project is intended for **educational and portfolio demonstration purposes only**. All activity was performed in a controlled lab environment. No real malicious activity or unauthorized access was conducted.
