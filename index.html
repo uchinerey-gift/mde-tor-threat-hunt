@@ -58,17 +58,19 @@
         </section>
 
         <section class="section-card">
-            <h2>📁 Folder Structure</h2>
-            <pre><code>mde-tor-threat-hunt/
-├── assets/
-├── css/
-│   └── style.css
-├── evidence/
-│   └── screenshots/
-├── report/
-├── index.html
-└── README.md</code></pre>
+            <h2>🧭 Investigation Scope & Coverage</h2>
+            <p>
+                This investigation focused on identifying unauthorized anonymization software usage on a managed Windows
+                endpoint by validating telemetry coverage across file, process, and network activity.
+            </p>
+            <ul class="meta-list">
+                <li><strong>File Activity:</strong> TOR installer download, artifact creation, and deletion</li>
+                <li><strong>Process Activity:</strong> Silent installation execution and TOR Browser launch</li>
+                <li><strong>Network Activity:</strong> TOR-related outbound connections over known TOR ports</li>
+                <li><strong>Anti-Forensics:</strong> Creation and removal of a suspicious local file</li>
+            </ul>
         </section>
+
 
         <section class="section-card">
             <h2>🔥 Phase 1 — Simulated Unauthorized TOR Activity</h2>
@@ -95,7 +97,7 @@
 | project Timestamp, DeviceName, OnboardingStatus, SensorHealthState
 | order by Timestamp desc</code></pre>
 
-            <p><strong>KQL Results Screenshot</strong> — <code>09_KQL_DeviceInfo_Device_Visibility.png</code></p>
+            <p><strong>KQL Results Screenshot</strong> — <code>KQL_DeviceInfo_Device_Visibility</code></p>
             <img src="report/09_KQL_DeviceInfo_Device_Visibility.png" width="800" alt="KQL results - Device visibility">
         </section>
 
@@ -116,7 +118,7 @@
 | project Timestamp, DeviceName, SensorHealthState
 | order by Timestamp desc</code></pre>
 
-            <p><strong>KQL Results Screenshot</strong> — <code>10_KQL_DeviceInfo_Sensor_Health.png</code></p>
+            <p><strong>KQL Results Screenshot</strong> — <code>KQL_DeviceInfo_Sensor_Health</code></p>
             <img src="report/10_KQL_DeviceInfo_Sensor_Health.png" width="800" alt="KQL results - Sensor health">
         </section>
 
@@ -138,7 +140,7 @@
 | project Timestamp, DeviceName, ActionType, FileName, FolderPath
 | order by Timestamp desc</code></pre>
 
-            <p><strong>KQL Results Screenshot</strong> — <code>11_KQL_DeviceFileEvents_TOR_Installer_Download.png</code>
+            <p><strong>KQL Results Screenshot</strong> — <code>KQL_DeviceFileEvents_TOR_Installer_Download</code>
             </p>
             <img src="report/11_KQL_DeviceFileEvents_TOR_Installer_Download.png" width="800"
                 alt="KQL results - TOR installer download">
@@ -162,7 +164,7 @@
 | project Timestamp, DeviceName, FileName, FolderPath
 | order by Timestamp desc</code></pre>
 
-            <p><strong>KQL Results Screenshot</strong> — <code>12_KQL_DeviceFileEvents_TOR_Installer_Filename.png</code>
+            <p><strong>KQL Results Screenshot</strong> — <code>KQL_DeviceFileEvents_TOR_Installer_Filename</code>
             </p>
             <img src="report/12_KQL_DeviceFileEvents_TOR_Installer_Filename.png" width="800"
                 alt="KQL results - TOR installer filename">
@@ -187,7 +189,7 @@
 | project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine
 | order by Timestamp desc</code></pre>
 
-            <p><strong>KQL Results Screenshot</strong> — <code>13_KQL_DeviceProcessEvents_TOR_Silent_Install.png</code>
+            <p><strong>KQL Results Screenshot</strong> — <code>KQL_DeviceProcessEvents_TOR_Silent_Install</code>
             </p>
             <img src="report/13_KQL_DeviceProcessEvents_TOR_Silent_Install.png" width="800"
                 alt="KQL results - TOR silent install">
@@ -210,7 +212,7 @@
 | project Timestamp, DeviceName, AccountName, FileName, ProcessCommandLine
 | order by Timestamp desc</code></pre>
 
-            <p><strong>KQL Results Screenshot</strong> — <code>14_KQL_DeviceProcessEvents_TOR_Launch.png</code></p>
+            <p><strong>KQL Results Screenshot</strong> — <code>KQL_DeviceProcessEvents_TOR_Launch</code></p>
             <img src="report/14_KQL_DeviceProcessEvents_TOR_Launch.png" width="800" alt="KQL results - TOR launch">
         </section>
 
@@ -234,7 +236,7 @@
 | order by Timestamp desc</code></pre>
 
             <p><strong>KQL Results Screenshot</strong> —
-                <code>15_KQL_DeviceNetworkEvents_TOR_Network_Activity.png</code></p>
+                <code>KQL_DeviceNetworkEvents_TOR_Network_Activity</code></p>
             <img src="report/15_KQL_DeviceNetworkEvents_TOR_Network_Activity.png" width="800"
                 alt="KQL results - TOR network activity">
         </section>
@@ -262,7 +264,7 @@ Remove-Item -Path "tor-shopping-list.txt"</code></pre>
 | order by Timestamp desc</code></pre>
 
             <p><strong>KQL Results Screenshot</strong> —
-                <code>16_KQL_DeviceFileEvents_Shopping_List_FileEvents.png</code></p>
+                <code>KQL_DeviceFileEvents_Shopping_List_FileEvents</code></p>
             <img src="report/16_KQL_DeviceFileEvents_Shopping_List_FileEvents.png" width="800"
                 alt="KQL results - shopping list file events">
         </section>
