@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="220" viewBox="0 0 220 220" role="img" aria-label="TOR Threat Hunt Logo">
+  <defs>
+    <radialGradient id="g" cx="35%" cy="30%" r="80%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="55%" stop-color="#5b21b6"/>
+      <stop offset="100%" stop-color="#2e1065"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="110" cy="110" r="104" fill="url(#g)" stroke="#111827" stroke-width="4"/>
+
+  <g fill="#ffffff">
+    <path d="M110 48c-25.7 0-46.6 20.9-46.6 46.6 0 18.9 11.4 35.2 27.7 42.3v-22.2c-5.1-4.3-8.3-10.7-8.3-17.9 0-12.9 10.5-23.4 23.4-23.4s23.4 10.5 23.4 23.4c0 7.2-3.2 13.6-8.3 17.9v22.2c16.3-7.1 27.7-23.4 27.7-42.3C156.6 68.9 135.7 48 110 48zm-7.8 100.1V92.6h15.6v55.5c0 10.8 7.9 19.6 17.9 21.1v14.1H84.3v-14.1c10-1.5 17.9-10.3 17.9-21.1z"/>
+    <circle cx="110" cy="94" r="9" fill="#111827" opacity=".35"/>
+  </g>
+
+  <g fill="#ffffff" opacity=".95">
+    <path d="M66 178h88v10H66z"/>
+  </g>
+
+  <text x="110" y="205" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="14" fill="#e5e7eb">
+    TOR Threat Hunt
+  </text>
+</svg>
