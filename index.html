@@ -78,7 +78,7 @@
 
 
         <section class="section-card" id="phase1" tabindex="0">
-            <h2>🔥 Phase 1 — Simulated Unauthorized TOR Activity</h2>
+            <h2>🔥 Simulated Unauthorized TOR Activity</h2>
             <p class="muted">
                 Each step includes: what/why, PowerShell activity generation, PowerShell evidence, KQL query, and KQL
                 results evidence.
@@ -88,7 +88,9 @@
         <!-- STEP 1 -->
         <section class="section-card" id="step-1" tabindex="0">
             <h3>1.1 Validate Device Visibility</h3>
-            <p>Confirmed the endpoint is visible and actively reporting to ensure telemetry capture.</p>
+            <p>Validated that the Windows endpoint was onboarded and actively reporting to Microsoft Defender for Endpoint. This step
+            establishes investigative ground truth by confirming that telemetry ingestion is functioning before performing any
+            threat-hunting queries, ensuring subsequent findings are reliable and actionable.</p>
 
             <p><strong>PowerShell Commands</strong></p>
             <pre><code class="language-powershell"># Validation performed in Microsoft Defender portal (no local command)</code></pre>
@@ -109,7 +111,9 @@
         <!-- STEP 2 -->
         <section class="section-card" id="step-2" tabindex="0">
             <h3>1.2 Confirm Defender Sensor Running</h3>
-            <p>Verified the Defender Sense service is running to confirm telemetry ingestion.</p>
+            <p>Verified that the Microsoft Defender Sense service was running on the endpoint to confirm endpoint detection and
+            response (EDR) coverage. Sensor health validation ensures that file, process, and network events generated later in the
+            lab are accurately captured and available for advanced hunting.</p>
 
             <p><strong>PowerShell Commands</strong></p>
             <pre><code class="language-powershell">Get-Service -Name Sense</code></pre>
@@ -130,7 +134,9 @@
         <!-- STEP 3 -->
         <section class="section-card" id="step-3" tabindex="0">
             <h3>1.3 Download TOR Installer</h3>
-            <p>Downloaded the TOR Browser installer to generate file telemetry.</p>
+            <p>Downloaded the TOR Browser installer to generate file creation and download telemetry. This activity simulates the
+            initial introduction of unauthorized anonymization software into an enterprise environment and establishes the first
+            observable indicator of policy-violating behavior.</p>
 
             <p><strong>PowerShell Commands</strong></p>
             <pre><code class="language-powershell"># TOR installer downloaded via browser</code></pre>
@@ -154,7 +160,9 @@
         <!-- STEP 4 -->
         <section class="section-card" id="step-4" tabindex="0">
             <h3>1.4 Confirm Installer Filename</h3>
-            <p>Confirmed exact installer filename to ensure accurate hunting.</p>
+            <p>Identified and documented the exact TOR installer filename and version present on disk. Accurate filename validation is
+            critical for precise KQL hunting and prevents false negatives when detecting installer-related file and process activity
+            across the environment.</p>
 
             <p><strong>PowerShell Commands</strong></p>
             <pre><code class="language-powershell"># Verified installer filename in Downloads</code></pre>
@@ -178,7 +186,9 @@
         <!-- STEP 5 -->
         <section class="section-card" id="step-5" tabindex="0">
             <h3>1.5 Execute Silent Install</h3>
-            <p>Executed a silent installation to simulate unauthorized software deployment.</p>
+            <p>Executed the TOR installer using silent installation flags to simulate stealthy, user-initiated software deployment.
+            Silent installs are a common technique used to bypass user awareness and can indicate attempts to evade organizational
+            controls.</p>
 
             <p><strong>PowerShell Commands</strong></p>
             <pre><code class="language-powershell">tor-browser-windows-x86_64-portable-15.0.3.exe  /S</code></pre>
@@ -203,7 +213,8 @@
         <!-- STEP 6 -->
         <section class="section-card" id="step-6" tabindex="0">
             <h3>1.6 Launch TOR Browser</h3>
-            <p>Launched TOR to generate process execution telemetry.</p>
+            <p>Launched the TOR Browser to generate process execution telemetry associated with anonymization tooling. This step
+            validates Defender's ability to detect TOR-related binaries such as tor.exe and firefox.exe executing on the endpoint.</p>
 
             <p><strong>PowerShell Commands</strong></p>
             <pre><code class="language-powershell"># Launched TOR Browser frome the extracted folder</code></pre>
@@ -224,7 +235,8 @@
         <!-- STEP 7 -->
         <section class="section-card" id="step-7" tabindex="0">
             <h3>1.7 Generate TOR Network Activity</h3>
-            <p>Generated anonymized network connections through TOR.</p>
+            <p>Generated anonymized outbound network connections by browsing through the TOR network. This activity produces network
+            telemetry over known TOR ports and validates Defender’s visibility into anonymization-related communication patterns.</p>
 
             <p><strong>PowerShell Commands</strong></p>
             <pre><code class="language-powershell"># Browsing activity through TOR</code></pre>
@@ -249,7 +261,9 @@
         <!-- STEP 8 -->
         <section class="section-card" id="step-8" tabindex="0">
             <h3>1.8 Create and Delete Suspicious File</h3>
-            <p>Created and deleted a file to simulate basic anti-forensics behavior.</p>
+            <p>Created and deleted a suspicious file (tor-shopping-list.txt) to simulate artifact staging and basic anti-forensics
+            behavior. This step demonstrates how Defender captures file creation, modification, and deletion events that may
+            indicate attempts to obscure user activity.</p>
 
             <p><strong>PowerShell Commands</strong></p>
             <pre><code class="language-powershell">cd $env:USERPROFILE\Desktop
