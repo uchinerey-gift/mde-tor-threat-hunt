@@ -18,8 +18,8 @@
             <h1>🕵🏾‍♀️ Microsoft Defender Advanced Hunting — Unauthorized TOR Usage Lab</h1>
 
             <p class="subtitle">
-                End-to-end threat hunting case study: TOR download, silent install, execution, network activity, and
-                basic anti-forensics on a Windows 11 endpoint.
+                End-to-end threat hunting case study analyzing unauthorized TOR installation, execution, anonymized network traffic, and
+                anti-forensics on a Windows 11 endpoint.
             </p>
 
             <div class="badge-row">
@@ -42,12 +42,16 @@
         <section class="section-card" id="overview" tabindex="0">
             <h2>📌 Overview</h2>
             <p>
-                This project demonstrates how unauthorized TOR Browser usage appears in Microsoft Defender for Endpoint
-                (MDE)
-                telemetry and how to hunt for it using Advanced Hunting (KQL).
+                This project demonstrates how unauthorized TOR Browser usage manifests in Microsoft Defender for Endpoint (MDE)
+                telemetry and how that activity can be identified through proactive threat hunting using Advanced Hunting (KQL).
+                
+                The objective of this lab is to showcase SOC-style investigation skills, including endpoint telemetry validation, file,
+                process, and network event correlation, and clear documentation of findings to support detection, response, and policy
+                enforcement decisions.
             </p>
             <p class="tagline">
-                Goal: demonstrate real SOC-style investigation, evidence collection, and documentation skills.
+                Goal: Demonstrate SOC-style threat hunting by validating endpoint telemetry, correlating file, process, and network
+                activity, and documenting findings in a clear, analyst-ready format.
             </p>
         </section>
 
@@ -81,8 +85,9 @@
         <section class="section-card" id="phase1" tabindex="0">
             <h2>🔥 Simulated Unauthorized TOR Activity</h2>
             <p class="muted">
-                Each step includes: what/why, PowerShell activity generation, PowerShell evidence, KQL query, and KQL
-                results evidence.
+                This section documents a complete, end-to-end SOC-style investigation into unauthorized TOR Browser usage on a managed
+                Windows endpoint. The activity was intentionally designed to reflect policy-violating anonymization behavior that may
+                bypass traditional alerts but still represents a monitoring, compliance, and potential data exfiltration risk.
             </p>
         </section>
 
