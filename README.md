@@ -5,6 +5,14 @@
 ![Tools](https://img.shields.io/badge/Tools-KQL%20%7C%20PowerShell-orange)
 ![Focus](https://img.shields.io/badge/Focus-Threat%20Hunting%20%7C%20EDR-lightgrey)
 
+## 🌐 Live Project Demo
+
+👉 **View the interactive case study:**  
+https://uchinerey-gift.github.io/mde-tor-threat-hunt/
+
+This live page presents the full SOC-style investigation, including step-by-step actions, PowerShell activity, KQL hunting queries, and supporting evidence.
+
+
 A hands-on Microsoft Defender for Endpoint threat-hunting project demonstrating how unauthorized TOR Browser activity appears across file, process, and network telemetry — and how to investigate it using Advanced Hunting (KQL).
 
 ---
@@ -94,6 +102,13 @@ This project reflects real-world SOC workflows by demonstrating how analysts val
 ## 📈 Continuous Development
 
 This project represents an ongoing focus on strengthening SOC analyst skills through hands-on threat hunting, iterative query refinement, and professional documentation of endpoint investigations using Microsoft Defender for Endpoint.
+
+---
+
+## 🔗 Project Links
+
+- **Live Case Study:** https://uchinerey-gift.github.io/mde-tor-threat-hunt/
+- **Source Repository:** https://github.com/uchinerey-gift/mde-tor-threat-hunt
 
 ---
 
